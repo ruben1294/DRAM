@@ -195,14 +195,6 @@ Organic Acids Malate	Malate	K00025 | K00026 | K00024 | K00116 | K01676 | K01677 
 Aromatics/Phenolics Vanillin	Vanillin	K21802 | K24276	carbon
 Lipids Glycerol	Glycerol	K01189 | K07406 | K07407 | K00005 | K22251 | K18097 | K00864 | K06120 | K06121 | K06122 | K00011 | K00002 | K13979	carbon
 Microbial Compounds Chitin	Chitin	K01183 | K20547 | K13381 | K01452	carbon
-
-# =========================================================================
-# SULFUR CYCLE — EXPANDED RULES (ARCHAEA-MOD-V2)
-# References: Müller et al. 2015 ISME J; Anantharaman et al. 2018 ISME J;
-# Kjeldsen et al. 2019 Sci Rep; Loy et al. 2009 Environ Microbiol
-# The existing "S reducer" and "S oxidizer" rules are retained for backward
-# compatibility; these new rules add specificity and discriminate pathways.
-# =========================================================================
 Dissimilatory Sulfate Reducer Strict	DissimSulfateReducerStrict	DsrABfull & AprAB & SatK00958 & QmoABC	energy	ARCHAEA-MOD-V2: STRICT rule. Canonical DSR requires the full enzymatic pathway: dsrAB (sulfite reductase) + aprAB (APS reductase) + sat (ATP sulfurylase) + qmoABC (quinone oxidoreductase coupling DSR to quinone pool). This rule eliminates the false positive of organisms with sat alone (shared between assimilatory and dissimilatory pathways).
 	DsrABfull	K11180 & K11181	energy	dsrA alpha subunit + dsrB beta subunit together; presence of both is required
 	AprAB	K00394 & K00395	energy	aprA + aprB together; diagnostic of dissimilatory sulfate/sulfite metabolism
@@ -223,15 +215,6 @@ Thiosulfate Reducer PhsABC	ThiosulfateReducerPhs	PhsABC	energy	ARCHAEA-MOD-V2: S
 	PhsABC	K08352 & K08353 & K08354	energy	phsA catalytic + phsB iron-sulfur + phsC membrane anchor
 DMSO/TMAO Reducer DmsABC	DMSOReducerDms	DmsABC	energy	ARCHAEA-MOD-V2: anaerobic respiration of DMSO/TMAO via dmsABC complex.
 	DmsABC	K07306 & K07307 & K07308	energy	dmsA catalytic + dmsB iron-sulfur + dmsC membrane anchor
-
-# =========================================================================
-# HYDROGENASES — HydDB-based classification (ARCHAEA-MOD-V2)
-# References: Greening et al. 2016 ISME J (HydDB); Søndergaard et al. 2016
-# NAR; Thauer et al. 2010 ARB; Schuchmann & Müller 2012.
-# Each group has distinct physiological roles. Presence of any enables the
-# "AnyHydrogenase" meta-trait; specific subsets enable Hydrogenotroph /
-# Hydrogen Evolver traits.
-# =========================================================================
 Hydrogenase Group 1 NiFe	HydrogenaseG1NiFe	HyaB | HybC	energy	ARCHAEA-MOD-V2: Group 1 [NiFe] — uptake/respiratory hydrogenases. H2 oxidation coupled to anaerobic/microaerobic respiration. Periplasmic/outward-facing. Signature of hydrogenotrophic lifestyle.
 	HyaB	K06281 | K06282	energy	[NiFe] large subunit (hyaB/hyaL-type)
 	HybC	K00437	energy	hybC [NiFe]-hydrogenase
@@ -255,11 +238,6 @@ Hydrogenase FeFe Hnd	HydrogenaseFeFeHnd	K18331 | K18330 | K18329	energy	ARCHAEA-
 Any Hydrogenase	AnyHydrogenase	HydrogenaseG1NiFe | HydrogenaseG3aNiFe | HydrogenaseG3cNiFeMvh | HydrogenaseG3dNiFe | HydrogenaseG4NiFe | HydrogenaseFeFeHydA | HydrogenaseFeFeHnd	energy	ARCHAEA-MOD-V2: Meta-trait — any of the classified hydrogenase groups present.
 Hydrogenotroph	Hydrogenotroph	HydrogenaseG1NiFe | [HydrogenaseG3aNiFe & not(methanogen)]	energy	ARCHAEA-MOD-V2: H2 uptake for energy conservation. Group 1 [NiFe] is diagnostic (H2 oxidation coupled to respiration). Group 3a without methanogenesis context also indicates hydrogenotrophy (Archaeoglobus-type sulfate reducers).
 Hydrogen Evolver	HydrogenEvolver	HydrogenaseG4NiFe | HydrogenaseFeFeHydA	energy	ARCHAEA-MOD-V2: H2 production. Group 4 [NiFe] couples H2 evolution to ion pumping; [FeFe] HydA classically catalyzes fermentative H2 production. Note: [FeFe] Hnd is NOT included here because it is bidirectional (uptake in sulfate reducers, potentially evolving in fermenters); Hnd direction requires physiological context.
-
-# =========================================================================
-# CARBON MONOXIDE OXIDATION (ARCHAEA-MOD-V2)
-# References: King & Weber 2007; Robb & Techtmann 2018
-# =========================================================================
 Aerobic CO Oxidizer	AerobicCOOxidizer	CoxL & CoxM & CoxS	energy	ARCHAEA-MOD-V2: STRICT — aerobic Mo-CODH requires all three subunits CoxL+CoxM+CoxS. K03518 (CoxS) alone is NOT diagnostic: the same [2Fe-2S] small subunit topology is present in XDH, AOR and other molybdo-hydroxylases of the CO-DH/XDH superfamily. In the dataset, 35/54 MAGs have CoxS alone but only 1 has the full complex.
 	CoxL	K03520	energy	catalytic large subunit (Mo-active site)
 	CoxM	K03519	energy	medium subunit (FAD-binding)
@@ -267,17 +245,7 @@ Aerobic CO Oxidizer	AerobicCOOxidizer	CoxL & CoxM & CoxS	energy	ARCHAEA-MOD-V2: 
 Anaerobic CO Oxidizer	AnaerobicCOOxidizer	CooS & CooF	energy	ARCHAEA-MOD-V2: Ni-CODH (cooS) coupled to ferredoxin (cooF). Anaerobic oxidation CO → CO2 with ferredoxin reduction, in Wood-Ljungdahl context.
 	CooS	K00198	energy	Ni-CODH catalytic subunit (aka cdhA/acsA)
 	CooF	K00197	energy	Fe-S protein; ferredoxin-like partner
-
-# =========================================================================
-# ANAEROBIC METHANE OXIDATION (ANME) (ARCHAEA-MOD-V2)
-# References: Knittel & Boetius 2009; McGlynn 2017
-# =========================================================================
 Anaerobic Methane Oxidizer ANME	ANME	mcr & [DsrABfull | AprAB]	energy	ARCHAEA-MOD-V2: ANME use methyl-CoM reductase in REVERSE direction (CH4 activation) coupled typically to sulfate reduction (syntrophic with SRB or via direct electron transfer). Presence of mcrABG AND dissimilatory sulfate-reduction signature discriminates ANME from methanogens. Note: the main DRAM2 "methanogen" trait is already mutually exclusive via NegativeForFermenter/sulfatereducer logic.
-
-# =========================================================================
-# UREASE / NITROGEN MINERALIZATION (ARCHAEA-MOD-V2)
-# References: Mobley & Hausinger 1989; Alonso-Sáez et al. 2012 PNAS
-# =========================================================================
 Urease Nitrogen Mineralization	UreaseNMineralization	UreABC	energy	ARCHAEA-MOD-V2: urease complex hydrolyzes urea to NH3 + CO2, supplying ammonia as N source. Documented in AOA (Alonso-Sáez 2012) as strategy for low-substrate oligotrophic ocean. Distinct functional rasgo from "Nitrogen fixer" and from "Aerobic Ammonia Oxidizer".
 	UreABC	UreC & UreB & UreA	energy	full heterotrimeric urease
 	UreC	K01428	energy	urease alpha subunit (catalytic)
