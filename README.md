@@ -1,5 +1,32 @@
 # DRAM v2
 
+> **This is a fork.** [ruben1294/DRAM](https://github.com/ruben1294/DRAM),
+> branch `dev`, is DRAM2 as of upstream commit `90dfef6f` (2026-04-14) with the
+> changes below, made by Rubén Castañeda-Martínez for the archaeal MAGs of
+> [gom-archaeal-mags](https://github.com/ruben1294/gom-archaeal-mags). It is
+> distributed under the same GNU GPL v3 as DRAM2. For anything else, use the
+> [original repository](https://github.com/WrightonLabCSU/DRAM).
+>
+> - `bin/format_kegg_database.py` and `modules/local/database/format_kegg_db.nf`:
+>   fixes to the KEGG database formatting; `workflows/dram.nf`:
+>   `skip_gene_ko_link` passed to `FORMAT_KEGG_DB` as a boolean string
+>   (2026-02).
+> - `bin/assets/traits_rules_archaea.tsv`: trait rules calibrated for archaea,
+>   derived from `bin/assets/traits_rules.tsv`; every changed rule carries an
+>   `ARCHAEA-MOD` note. `nextflow.config` points `trait_rules_tsv` at it by
+>   default (2026-04).
+> - The `dram_viz` container reverted to the version that still writes
+>   `product.tsv` (2026-04-20).
+> - `conf/gom_archaea_mags.config`, `conf/gom_archaea_mags_test.config` and
+>   `conf/gom_archaea_slurm.config`: the run configuration of gom-archaeal-mags,
+>   derived from `nextflow.config` and `conf/slurm.config` (2026-10-08). They
+>   supersede `conf/CMRA_omica_slurm.config`, the earlier profile for one
+>   cluster (2026-04-20).
+>
+> The analyses of gom-archaeal-mags ran commit `aa5889d7`; the commit that adds
+> the three `conf/gom_archaea_*` files changes no pipeline code.
+
+
 <p align="center">
   <img src="assets/images/DRAM2_large.png" width="600" height="600" alt="DRAM v2 logo">
 </p>
